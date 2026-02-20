@@ -1,0 +1,15 @@
+<h2>Edit Employee</h2>
+
+<form action="/edit/<%= employee._id %>" method="POST">
+  <input name="name" value="<%= employee.name %>" required />
+  <br><br>
+  <input name="email" value="<%= employee.email %>" required />
+  <br><br>
+  <input name="position" value="<%= employee.position %>" required />
+  <br><br>
+  <input name="salary" type="number" value="<%= employee.salary %>" required />
+  <br><br>
+  <button type="submit">Update</button>
+</form>
+
+<a href="/dashboard">Back</a>
