@@ -1,3 +1,5 @@
+// all routes for viesw
+
 import express from "express";
 import Admin from "../models/Admin.js";
 import Employee from "../models/Employee.js";
@@ -5,7 +7,7 @@ import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-// simple auth check
+// auth check
 const checkAuth = (req) => {
   const token = req.cookies.token;
   if (!token) return false;
@@ -17,12 +19,13 @@ const checkAuth = (req) => {
   }
 };
 
-// Login page
+// Login 
 router.get("/", (req, res) => {
   res.render("login", { error: null });
 });
 
-// Login form submit
+
+// login form submit
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -40,7 +43,9 @@ router.post("/login", async (req, res) => {
   res.redirect("/dashboard");
 });
 
-// Dashboard
+
+
+// dashboard
 router.get("/dashboard", async (req, res) => {
   if (!checkAuth(req)) return res.redirect("/");
 
@@ -48,11 +53,14 @@ router.get("/dashboard", async (req, res) => {
   res.render("dashboard", { employees });
 });
 
-// Add employee page
+
+
+// add employee 
 router.get("/add", (req, res) => {
   if (!checkAuth(req)) return res.redirect("/");
   res.render("addEmployee");
 });
+
 
 // Add employee submit
 router.post("/add", async (req, res) => {
@@ -61,12 +69,14 @@ router.post("/add", async (req, res) => {
   res.redirect("/dashboard");
 });
 
-// Edit page
+
+// edit page
 router.get("/edit/:id", async (req, res) => {
   if (!checkAuth(req)) return res.redirect("/");
   const employee = await Employee.findById(req.params.id);
   res.render("editEmployee", { employee });
 });
+
 
 // Edit submit
 router.post("/edit/:id", async (req, res) => {
@@ -75,14 +85,16 @@ router.post("/edit/:id", async (req, res) => {
   res.redirect("/dashboard");
 });
 
-// Delete
+
+
+// Delete employee
 router.get("/delete/:id", async (req, res) => {
   if (!checkAuth(req)) return res.redirect("/");
   await Employee.findByIdAndDelete(req.params.id);
   res.redirect("/dashboard");
 });
 
-// Logout
+// logout 
 router.get("/logout", (req, res) => {
   res.clearCookie("token");
   res.redirect("/");

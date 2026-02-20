@@ -1,3 +1,5 @@
+// auth routes
+
 import express from "express";
 import { loginAdmin, logoutAdmin } from "../controllers/authController.js";
 const router = express.Router();

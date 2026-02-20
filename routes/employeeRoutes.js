@@ -1,3 +1,5 @@
+//  employee routes for CRUD
+
 import express from "express";
 import { verifyToken } from "../controllers/verifyToken.js";
 import {

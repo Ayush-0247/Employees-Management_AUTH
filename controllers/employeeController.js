@@ -1,5 +1,9 @@
+// controller for employee
+
 import Employee from "../models/Employee.js";
 
+
+// employee create
 export const createEmployee = async (req, res) => {
   try {
     const employee = await Employee.create(req.body);
@@ -9,6 +13,8 @@ export const createEmployee = async (req, res) => {
   }
 };
 
+
+//   get all employee
 export const getEmployees = async (req, res) => {
   try {
     const employees = await Employee.find();
@@ -17,6 +23,9 @@ export const getEmployees = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// get employee by id
 
 export const getEmployeeById = async (req, res) => {
   try {
@@ -27,6 +36,8 @@ export const getEmployeeById = async (req, res) => {
   }
 };
 
+
+// update employee by id
 export const updateEmployee = async (req, res) => {
   try {
     const employee = await Employee.findByIdAndUpdate(
@@ -40,6 +51,8 @@ export const updateEmployee = async (req, res) => {
   }
 };
 
+
+//  del employee 
 export const deleteEmployee = async (req, res) => {
   try {
     await Employee.findByIdAndDelete(req.params.id);
